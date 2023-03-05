@@ -11,8 +11,6 @@ public class Invoice {
 
 	public static void setData() {
 		try {
-			boolean addInvoiceData = true;
-			while (addInvoiceData) {
 				System.out.print("Enter Phone Number:  ");
 				int phoneNumberEnterd = Main.hold.nextInt();
 				System.out.print("Enter Fax Number:  ");
@@ -26,7 +24,6 @@ public class Invoice {
 					Main.newShop.invoiceList.get(i).websiteList.add(websiteEnterd);
 				}
 				System.out.println("Done!\n");
-			}
 
 		} catch (Exception ex) {
 			System.out.println("Invalid Input\n");

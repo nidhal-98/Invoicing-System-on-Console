@@ -6,6 +6,7 @@ public class Menu {
     }
     
     public void show() {
+    	System.out.println("");
         for (int i = 0; i < items.length; i++) {
             System.out.println((i+1) + ". " + items[i]);
         }

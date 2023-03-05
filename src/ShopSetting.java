@@ -11,38 +11,36 @@ import java.nio.file.Paths;
 public class ShopSetting {
 	public static void shopSetting() {
 		boolean menu = true;
-		while(menu) {
+		while (menu) {
 			try {
-				
-				String[] mainMenuOption = {"Load Data", "Set Shop Name", "Set Invoice Header", "Go Back"};
-				Menu mainMenu = new Menu(mainMenuOption);
-				mainMenu.show();
+
+				String[] subMenuOption = { "Load Data", "Set Shop Name", "Set Invoice Header", "Go Back" };
+				Menu subMenu = new Menu(subMenuOption);
+				subMenu.show();
 				String select = Main.hold.next();
 				switch (select) {
 				case "1":
 					break;
+					
 				case "2":
 					Shop.newShop();
 					break;
+					
 				case "3":
-					if(Main.newShop.invoiceList.size() == 0) {
-						System.out.println("There is no invoice, Create Invoice First :)\n");
-						menu = false;
-					}
-					else {
-						Invoice.setData();
-					}
+					Invoice.setData();
 					break;
+					
 				case "4":
+					menu = false;
 					break;
+					
 				default:
-					System.out.println("Invalid Input");
+					System.out.println("Invalid Input\n");
 				}
+			} catch (Exception ex) {
+				System.out.println("Invalid Input\n");
 			}
-				catch (Exception ex) {
-					System.out.println("Invalid Input");
-				}
-			
+
 		}
 	}
 }
