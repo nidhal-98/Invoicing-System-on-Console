@@ -35,19 +35,19 @@ public class Main {
 					else if(option.equalsIgnoreCase("N") || option.equalsIgnoreCase("NO")) {
 					}
 					else {
-						System.out.println("Invalid Input");
+						System.out.println("Invalid Input\n");
 					}
 					break;
 				case "7":
 					menu = false;
 					break;
 				default:
-					System.out.println("Invalid Input");
+					System.out.println("Invalid Input\n");
 				}
 			}
 		}
-		catch (NumberFormatException ex) {
-			System.out.println("Invalid Input");
+		catch (Exception ex) {
+			System.out.println("Invalid Input\n");
 		}
 	}
 

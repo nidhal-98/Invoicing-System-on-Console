@@ -22,11 +22,16 @@ public class ShopSetting {
 				case "1":
 					break;
 				case "2":
-					System.out.println("Enter the shop Name:  ");
 					Shop.newShop();
 					break;
 				case "3":
-					Invoice.setData();
+					if(Main.newShop.invoiceList.size() == 0) {
+						System.out.println("There is no invoice, Create Invoice First :)\n");
+						menu = false;
+					}
+					else {
+						Invoice.setData();
+					}
 					break;
 				case "4":
 					break;
@@ -34,7 +39,7 @@ public class ShopSetting {
 					System.out.println("Invalid Input");
 				}
 			}
-				catch (NumberFormatException ex) {
+				catch (Exception ex) {
 					System.out.println("Invalid Input");
 				}
 			

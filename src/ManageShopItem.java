@@ -4,13 +4,21 @@ public class ManageShopItem {
 		boolean menu = true;
 		while(menu) {
 			try {
-				
-				String[] mainMenuOption = {"Load Data", "Set Shop Name", "Set Invoice Header", "Go Back"};
+				String[] mainMenuOption = {"Add Items", "Delete Items", "Change Item Price","Report All Items", "Go Back"};
 				Menu mainMenu = new Menu(mainMenuOption);
 				mainMenu.show();
 				String select = Main.hold.next();
 				switch (select) {
 				case "1":
+					boolean addItem = true;
+					while(addItem) {
+						Product newProduct = new Product();
+						Main.newShop.productList.add(newProduct);
+						System.out.print("Enter Item ID:  ");
+						int itemIDEnterd = Main.hold.nextInt();
+						Main.newShop.productList.get((Main.newShop.productList.size()-1)).itemID = itemIDEnterd;
+						
+					}
 					break;
 				case "2":
 					break;
@@ -19,11 +27,11 @@ public class ManageShopItem {
 				case "4":
 					break;
 				default:
-					System.out.println("Invalid Input");
+					System.out.println("Invalid Input\n");
 				}
 			}
-				catch (NumberFormatException ex) {
-					System.out.println("Invalid Input");
+				catch (Exception ex) {
+					System.out.println("Invalid Input\n");
 				}
 			
 		}
