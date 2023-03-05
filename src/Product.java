@@ -2,6 +2,6 @@
 public class Product {
 	int itemID;
 	String itemName;
-	int price;
+	double price;
 	int quantity;
 }
