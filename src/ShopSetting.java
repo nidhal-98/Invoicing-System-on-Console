@@ -1,3 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ShopSetting {
 	public static void shopSetting() {
@@ -13,8 +22,11 @@ public class ShopSetting {
 				case "1":
 					break;
 				case "2":
+					System.out.println("Enter the shop Name:  ");
+					Shop.newShop();
 					break;
 				case "3":
+					Invoice.setData();
 					break;
 				case "4":
 					break;
