@@ -5,8 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class CreateNewInvoice {
+	static ArrayList<Product> item = new ArrayList<>();
 	public static void CreateNewInvoice1() {
-		ArrayList<Product> item = new ArrayList<>();
+		
 		try {
 			boolean header = true;
 			while(header) {
@@ -87,12 +88,13 @@ public class CreateNewInvoice {
 										System.out.println(String.format("| %-25s | %-10s | %-13s |", "Item Name", "Price", "Quantity"));
 										System.out.println("--------------------------------------------------------");
 										for (Product i : item) {
-										    System.out.println(String.format("| %-25s | R.O%9.2f | %6d ", i.getItemName(), i.getPrice(), i.getQuantity()));
+										    System.out.println(String.format("| %-25s | R.O%6.2f  %6d ", i.getItemName(), i.getPrice(), i.getQuantity()));
 										    total += i.getQuantity() * i.getPrice();
 										}
 										System.out.println("--------------------------------------------------------");
 										System.out.println(String.format("| %-30s | %-25s ", "Total:", total));
 										System.out.println("--------------------------------------------------------");
+										Serialize.invoice();
 										selectItem = false;
 										itemLoop = false;
 										header = false;

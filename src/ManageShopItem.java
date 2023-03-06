@@ -211,7 +211,7 @@ public class ManageShopItem {
 					break;
 
 				case "5":
-					Serialize.main();
+					Serialize.items();
 					menu = false;
 					break;
 				
