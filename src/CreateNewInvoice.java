@@ -74,24 +74,24 @@ public class CreateNewInvoice {
 										System.out.println("--------------------------------------------------------");
 										System.out.println("|                         INVOICE                        |");
 										System.out.println("--------------------------------------------------------");
-										System.out.println(String.format("| %-30s | %-30s |", "Shop Name:", Main.newShop.shopName));
-										System.out.println(String.format("| %-30s | %-30s |", "Shop Phone Number:", Shop.phoneNumberOwner));
-										System.out.println(String.format("| %-30s | %-30s |", "Shop Fax Number:", Shop.faxOwner));
-										System.out.println(String.format("| %-30s | %-30s |", "Shop Website:", Shop.website));
+										System.out.println(String.format("| %-30s | %-21s |", "Shop Name:", Main.newShop.shopName));
+										System.out.println(String.format("| %-30s | %-21s |", "Shop Phone Number:", Shop.phoneNumberOwner));
+										System.out.println(String.format("| %-30s | %-21s |", "Shop Fax Number:", Shop.faxOwner));
+										System.out.println(String.format("| %-30s | %-21s |", "Shop Website:", Shop.website));
 										System.out.println("--------------------------------------------------------");
-										System.out.println(String.format("| %-30s | %-30s |", "Invoice No.:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).number+1));
-										System.out.println(String.format("| %-30s | %-30s |", "Customer Name:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).fullName));
-										System.out.println(String.format("| %-30s | %-30s |", "Date:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).date));
-										System.out.println(String.format("| %-30s | %-30s |", "Website:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).emailList));
+										System.out.println(String.format("| %-30s | %-21s |", "Invoice No.:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).number+1));
+										System.out.println(String.format("| %-30s | %-21s |", "Customer Name:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).fullName));
+										System.out.println(String.format("| %-30s | %-21s |", "Date:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).date));
+										System.out.println(String.format("| %-30s | %-21s |", "Website:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).emailList));
 										System.out.println("--------------------------------------------------------");
-										System.out.println(String.format("| %-25s | %-10s | %-12s |", "Item Name", "Price", "Quantity"));
+										System.out.println(String.format("| %-25s | %-10s | %-13s |", "Item Name", "Price", "Quantity"));
 										System.out.println("--------------------------------------------------------");
 										for (Product i : item) {
-										    System.out.println(String.format("| %-25s | $%9.2f | %12d |", i.getItemName(), i.getPrice(), i.getQuantity()));
+										    System.out.println(String.format("| %-25s | R.O%9.2f | %6d ", i.getItemName(), i.getPrice(), i.getQuantity()));
 										    total += i.getQuantity() * i.getPrice();
 										}
 										System.out.println("--------------------------------------------------------");
-										System.out.println(String.format("| %-30s | %-30s |", "Total:", total));
+										System.out.println(String.format("| %-30s | %-25s ", "Total:", total));
 										System.out.println("--------------------------------------------------------");
 										selectItem = false;
 										itemLoop = false;
