@@ -107,7 +107,7 @@ public class ManageShopItem {
 						System.out.printf("%20s %20s\n", (i + 1) + ". " + Main.newShop.productList.get(i).getItemName(),
 								Main.newShop.productList.get(i).getItemID());
 					}
-					System.out.print("Enter Number of product to delete it:  ");
+					System.out.println("Enter Number of product to delete it:  ");
 					int deleteItem = Main.hold.nextInt();
 					if (deleteItem <= 0 || deleteItem > Main.newShop.productList.size()) {
 						System.out.println("Invalid Input\n");
@@ -143,7 +143,7 @@ public class ManageShopItem {
 
 				case "3":
 					if (Main.newShop.productList.isEmpty()) {
-						System.out.print("There is no Items\n");
+						System.out.println("There is no Items");
 						break;
 					} else {
 						for (int i = 0; i < Main.newShop.productList.size(); i++) {
@@ -189,7 +189,7 @@ public class ManageShopItem {
 
 				case "4":
 					if (Main.newShop.productList.isEmpty()) {
-						System.out.print("There is no Items\n");
+						System.out.println("There is no Items");
 						break;
 					} else {
 						System.out.println(
