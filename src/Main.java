@@ -24,10 +24,7 @@ public class Main {
 				case "2":
 					ManageShopItem.ManageShopItem1();
 				case "3":
-					i = i + 1;
-					Invoice newInvoice = new Invoice();
-					newInvoice.number = i;
-					newShop.invoiceList.add(newInvoice);
+					CreateNewInvoice.CreateNewInvoice1();
 					break;
 				case "7":
 					menu = false;

@@ -9,10 +9,10 @@ class Serialize implements Serializable {
 			ObjectOutputStream out = new ObjectOutputStream(file);
 
 			for (int i = 0; i < Main.newShop.productList.size(); i++) {
-				out.writeObject(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).itemID,
-						Main.newShop.productList.get(i).itemName, Main.newShop.productList.get(i).price + " R.O",
-						Main.newShop.productList.get(i).quantity,
-						((Main.newShop.productList.get(i).price) * (Main.newShop.productList.get(i).quantity)
+				out.writeObject(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
+						Main.newShop.productList.get(i).getItemName(), Main.newShop.productList.get(i).getPrice() + " R.O",
+						Main.newShop.productList.get(i).getQuantity(),
+						((Main.newShop.productList.get(i).getPrice()) * (Main.newShop.productList.get(i).getQuantity())
 								+ " R.O")));
 			}
 

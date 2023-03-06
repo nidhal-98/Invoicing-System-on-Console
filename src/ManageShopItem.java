@@ -28,20 +28,20 @@ public class ManageShopItem {
 						int itemIDEnterd = Main.hold.nextInt();
 						boolean ID = true;
 						for (int i = 0; i < Main.newShop.productList.size(); i++) {
-							if (Main.newShop.productList.get(i).itemID == itemIDEnterd) {
+							if (Main.newShop.productList.get(i).getItemID() == itemIDEnterd) {
 								System.out.println("This ID is already there!");
 								ID = false;
 								addItem = false;
 							}
 						}
 						if (ID == true) {
-							Main.newShop.productList.get((Main.newShop.productList.size() - 1)).itemID = itemIDEnterd;
+							Main.newShop.productList.get((Main.newShop.productList.size() - 1)).setItemID(itemIDEnterd);
 							System.out.print("Enter Item Name:  ");
 							String nameEntered = Main.hold.next();
 							boolean name = true;
 							for (int i = 0; i < Main.newShop.productList.size(); i++) {
-								if (Main.newShop.productList.get(i).itemName != null
-										&& Main.newShop.productList.get(i).itemName.equalsIgnoreCase(nameEntered)) {
+								if (Main.newShop.productList.get(i).getItemName() != null
+										&& Main.newShop.productList.get(i).getItemName().equalsIgnoreCase(nameEntered)) {
 									System.out.println("This Name is already there!");
 									name = false;
 									addItem = false;
@@ -50,15 +50,15 @@ public class ManageShopItem {
 							}
 							if (name == true) {
 								Main.newShop.productList
-										.get((Main.newShop.productList.size() - 1)).itemName = nameEntered;
+										.get((Main.newShop.productList.size() - 1)).setItemName(nameEntered);
 								System.out.print("Enter Item Price:  ");
 								double itemPriceEnterd = Main.hold.nextDouble();
 								Main.newShop.productList
-										.get((Main.newShop.productList.size() - 1)).price = itemPriceEnterd;
+										.get((Main.newShop.productList.size() - 1)).setPrice(itemPriceEnterd);
 								System.out.print("Enter Item Quantity:  ");
 								int itemQuantityEnterd = Main.hold.nextInt();
 								Main.newShop.productList
-										.get((Main.newShop.productList.size() - 1)).quantity = itemQuantityEnterd;
+										.get((Main.newShop.productList.size() - 1)).setQuantity(itemQuantityEnterd);
 								System.out.print("Do you want to add other item?  ");
 								String option = Main.hold.next();
 								if (option.equalsIgnoreCase("Y") || option.equalsIgnoreCase("YES")) {
@@ -72,11 +72,11 @@ public class ManageShopItem {
 										writer.write(
 												"\n..............................................................................................................\n");
 										for (int i = 0; i < Main.newShop.productList.size(); i++) {
-											writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).itemID,
-													Main.newShop.productList.get(i).itemName,
-													Main.newShop.productList.get(i).price + " R.O",
-													Main.newShop.productList.get(i).quantity, ((Main.newShop.productList.get(i).price)
-															* (Main.newShop.productList.get(i).quantity) + " R.O")));
+											writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
+													Main.newShop.productList.get(i).getItemName(),
+													Main.newShop.productList.get(i).getPrice() + " R.O",
+													Main.newShop.productList.get(i).getQuantity(), ((Main.newShop.productList.get(i).getPrice())
+															* (Main.newShop.productList.get(i).getQuantity()) + " R.O")));
 											writer.write(
 													"\n--------------------------------------------------------------------------------------------------------------\n");
 										}
@@ -104,8 +104,8 @@ public class ManageShopItem {
 					}
 					System.out.printf("%20s %20s\n", "Item Name", "Item ID");
 					for (int i = 0; i < Main.newShop.productList.size(); i++) {
-						System.out.printf("%20s %20s\n", (i + 1) + ". " + Main.newShop.productList.get(i).itemName,
-								Main.newShop.productList.get(i).itemID);
+						System.out.printf("%20s %20s\n", (i + 1) + ". " + Main.newShop.productList.get(i).getItemName(),
+								Main.newShop.productList.get(i).getItemID());
 					}
 					System.out.print("Enter Number of product to delete it:  ");
 					int deleteItem = Main.hold.nextInt();
@@ -124,11 +124,11 @@ public class ManageShopItem {
 							writer.write(
 									"\n..............................................................................................................\n");
 							for (int i = 0; i < Main.newShop.productList.size(); i++) {
-								writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).itemID,
-										Main.newShop.productList.get(i).itemName,
-										Main.newShop.productList.get(i).price + " R.O",
-										Main.newShop.productList.get(i).quantity, ((Main.newShop.productList.get(i).price)
-												* (Main.newShop.productList.get(i).quantity) + " R.O")));
+								writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
+										Main.newShop.productList.get(i).getItemName(),
+										Main.newShop.productList.get(i).getPrice() + " R.O",
+										Main.newShop.productList.get(i).getQuantity(), ((Main.newShop.productList.get(i).getPrice())
+												* (Main.newShop.productList.get(i).getQuantity()) + " R.O")));
 								writer.write(
 										"\n--------------------------------------------------------------------------------------------------------------\n");
 							}
@@ -147,7 +147,7 @@ public class ManageShopItem {
 						break;
 					} else {
 						for (int i = 0; i < Main.newShop.productList.size(); i++) {
-							System.out.println((i + 1) + ". " + Main.newShop.productList.get(i).itemName);
+							System.out.println((i + 1) + ". " + Main.newShop.productList.get(i).getItemName());
 						}
 						System.out.print("Enter the number of item:  ");
 						int rePriceOption = Main.hold.nextInt();
@@ -156,9 +156,9 @@ public class ManageShopItem {
 						} else {
 							rePriceOption = rePriceOption - 1;
 							System.out.print("Enter the price of "
-									+ Main.newShop.productList.get(rePriceOption).itemName + ":  ");
+									+ Main.newShop.productList.get(rePriceOption).getItemName() + ":  ");
 							double rePrice = Main.hold.nextDouble();
-							Main.newShop.productList.get(rePriceOption).price = rePrice;
+							Main.newShop.productList.get(rePriceOption).setPrice(rePrice);
 							System.out.println("It has changed successfully :)\n");
 							try {
 								FileWriter writer = new FileWriter("items.txt", true);
@@ -169,11 +169,11 @@ public class ManageShopItem {
 								writer.write(
 										"\n..............................................................................................................\n");
 								for (int i = 0; i < Main.newShop.productList.size(); i++) {
-									writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).itemID,
-											Main.newShop.productList.get(i).itemName,
-											Main.newShop.productList.get(i).price + " R.O",
-											Main.newShop.productList.get(i).quantity, ((Main.newShop.productList.get(i).price)
-													* (Main.newShop.productList.get(i).quantity) + " R.O")));
+									writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
+											Main.newShop.productList.get(i).getItemName(),
+											Main.newShop.productList.get(i).getPrice() + " R.O",
+											Main.newShop.productList.get(i).getQuantity(), ((Main.newShop.productList.get(i).getPrice())
+													* (Main.newShop.productList.get(i).getQuantity()) + " R.O")));
 									writer.write(
 											"\n--------------------------------------------------------------------------------------------------------------\n");
 								}
@@ -197,11 +197,11 @@ public class ManageShopItem {
 						System.out.printf("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name", "Price", "Quantity",
 								"QTY.");
 						for (int i = 0; i < Main.newShop.productList.size(); i++) {
-							System.out.printf("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).itemID,
-									Main.newShop.productList.get(i).itemName,
-									Main.newShop.productList.get(i).price + " R.O",
-									Main.newShop.productList.get(i).quantity, ((Main.newShop.productList.get(i).price)
-											* (Main.newShop.productList.get(i).quantity) + " R.O"));
+							System.out.printf("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
+									Main.newShop.productList.get(i).getItemName(),
+									Main.newShop.productList.get(i).getPrice() + " R.O",
+									Main.newShop.productList.get(i).getQuantity(), ((Main.newShop.productList.get(i).getPrice())
+											* (Main.newShop.productList.get(i).getQuantity()) + " R.O"));
 							System.out.println(
 									"--------------------------------------------------------------------------------------------------------------");
 						}
