@@ -30,6 +30,7 @@ public class ManageShopItem {
 						for (int i = 0; i < Main.newShop.productList.size(); i++) {
 							if (Main.newShop.productList.get(i).getItemID() == itemIDEnterd) {
 								System.out.println("This ID is already there!");
+								Main.newShop.productList.remove(Main.newShop.productList.size()-1);
 								ID = false;
 								addItem = false;
 							}
@@ -43,9 +44,9 @@ public class ManageShopItem {
 								if (Main.newShop.productList.get(i).getItemName() != null
 										&& Main.newShop.productList.get(i).getItemName().equalsIgnoreCase(nameEntered)) {
 									System.out.println("This Name is already there!");
+									Main.newShop.productList.remove(Main.newShop.productList.size()-1);
 									name = false;
 									addItem = false;
-									Main.newShop.productList.remove((Main.newShop.productList.size() - 1));
 								}
 							}
 							if (name == true) {
@@ -220,6 +221,7 @@ public class ManageShopItem {
 				}
 			} catch (Exception ex) {
 				System.out.println("Invalid Input\n");
+				Main.newShop.productList.remove(Main.newShop.productList.size()-1);
 			}
 
 		}

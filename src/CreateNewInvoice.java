@@ -23,16 +23,16 @@ public class CreateNewInvoice {
 					Main.newShop.invoiceList.get((Main.newShop.invoiceList.size() - 1)).date = formatDateTime;
 					System.out.println("Enter Full Name:  ");
 					String fullNameEntrerd = Main.hold.next();
-					Main.newShop.invoiceList.get((Main.newShop.productList.size() - 1)).fullName = fullNameEntrerd;
+					Main.newShop.invoiceList.get((Main.newShop.invoiceList.size() - 1)).fullName = fullNameEntrerd;
 					System.out.println("Enter Phone Number:  ");
 					int phoneNumberEntrerd = Main.hold.nextInt();
-					Main.newShop.invoiceList.get((Main.newShop.productList.size() - 1)).phoneNumber = phoneNumberEntrerd;
+					Main.newShop.invoiceList.get((Main.newShop.invoiceList.size() - 1)).phoneNumber = phoneNumberEntrerd;
 					System.out.println("Enter Fax Number:  ");
 					int faxNumberEntrerd = Main.hold.nextInt();
-					Main.newShop.invoiceList.get((Main.newShop.productList.size() - 1)).phoneNumber = faxNumberEntrerd;
+					Main.newShop.invoiceList.get((Main.newShop.invoiceList.size() - 1)).phoneNumber = faxNumberEntrerd;
 					System.out.println("Enter Email:  ");
 					String emailEntrerd = Main.hold.next();
-					Main.newShop.invoiceList.get((Main.newShop.productList.size() - 1)).emailList.add(emailEntrerd);
+					Main.newShop.invoiceList.get((Main.newShop.invoiceList.size() - 1)).emailList.add(emailEntrerd);
 					
 					boolean itemLoop = true;
 					while(itemLoop) {
@@ -94,6 +94,7 @@ public class CreateNewInvoice {
 										System.out.println("--------------------------------------------------------");
 										System.out.println(String.format("| %-30s | %-25s ", "Total:", total));
 										System.out.println("--------------------------------------------------------");
+										Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).total = total;
 										Serialize.invoice();
 										selectItem = false;
 										itemLoop = false;
@@ -114,6 +115,7 @@ public class CreateNewInvoice {
 		catch (Exception ex) {
 			System.out.println("Invalid Input");
 			System.out.println(ex.getMessage());
+			Main.newShop.invoiceList.remove(Main.newShop.invoiceList.size()-1);
 		}
 
 	}

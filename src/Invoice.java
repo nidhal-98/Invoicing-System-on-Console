@@ -8,4 +8,5 @@ public class Invoice {
 	HashSet<String> websiteList = new HashSet<String>();
 	int phoneNumber;
 	int fax;
+	double total;
 }

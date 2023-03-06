@@ -26,6 +26,9 @@ public class Main {
 				case "3":
 					CreateNewInvoice.CreateNewInvoice1();
 					break;
+				case "4":
+					Report.statistics();
+					break;
 				case "7":
 					menu = false;
 					break;
