@@ -18,7 +18,7 @@ public class ShopSetting {
 					break;
 					
 				case "3":
-					Invoice.setData();
+					Shop.setData();
 					break;
 					
 				case "4":

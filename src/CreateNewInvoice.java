@@ -51,6 +51,7 @@ public class CreateNewInvoice {
 							else {
 								itemOption = itemOption -1;
 								item.get(item.size()-1).setItemName(Main.newShop.productList.get(itemOption).getItemName());
+								System.out.println("The Quantity of " + item.get(itemOption).getItemName() + ": " + Main.newShop.productList.get(itemOption).getQuantity());
 								System.out.println("Enter Quantity:  ");
 								int quantity = Main.hold.nextInt();
 								if(quantity > Main.newShop.productList.get(itemOption).getQuantity()) {
@@ -62,12 +63,36 @@ public class CreateNewInvoice {
 									item.get(item.size()-1).setQuantity(quantity);
 									int newQuantity = Main.newShop.productList.get(itemOption).getQuantity()- quantity;
 									Main.newShop.productList.get(itemOption).setQuantity(newQuantity);
+									item.get(item.size()-1).setPrice(Main.newShop.productList.get(itemOption).getPrice());
 									System.out.println("Do You Want to Add other Items?");
 									String option = Main.hold.next();
 									if (option.equalsIgnoreCase("Y") || option.equalsIgnoreCase("YES")) {
 										selectItem = false;
 									}
 									else if (option.equalsIgnoreCase("N") || option.equalsIgnoreCase("No")) {
+										double total = 0;
+										System.out.println("--------------------------------------------------------");
+										System.out.println("|                         INVOICE                        |");
+										System.out.println("--------------------------------------------------------");
+										System.out.println(String.format("| %-30s | %-30s |", "Shop Name:", Main.newShop.shopName));
+										System.out.println(String.format("| %-30s | %-30s |", "Shop Phone Number:", Shop.phoneNumberOwner));
+										System.out.println(String.format("| %-30s | %-30s |", "Shop Fax Number:", Shop.faxOwner));
+										System.out.println(String.format("| %-30s | %-30s |", "Shop Website:", Shop.website));
+										System.out.println("--------------------------------------------------------");
+										System.out.println(String.format("| %-30s | %-30s |", "Invoice No.:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).number+1));
+										System.out.println(String.format("| %-30s | %-30s |", "Customer Name:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).fullName));
+										System.out.println(String.format("| %-30s | %-30s |", "Date:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).date));
+										System.out.println(String.format("| %-30s | %-30s |", "Website:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).emailList));
+										System.out.println("--------------------------------------------------------");
+										System.out.println(String.format("| %-25s | %-10s | %-12s |", "Item Name", "Price", "Quantity"));
+										System.out.println("--------------------------------------------------------");
+										for (Product i : item) {
+										    System.out.println(String.format("| %-25s | $%9.2f | %12d |", i.getItemName(), i.getPrice(), i.getQuantity()));
+										    total += i.getQuantity() * i.getPrice();
+										}
+										System.out.println("--------------------------------------------------------");
+										System.out.println(String.format("| %-30s | %-30s |", "Total:", total));
+										System.out.println("--------------------------------------------------------");
 										selectItem = false;
 										itemLoop = false;
 										header = false;
@@ -85,7 +110,8 @@ public class CreateNewInvoice {
 			}
 		}
 		catch (Exception ex) {
-			System.out.println("Invalid Input\n");
+			System.out.println("Invalid Input");
+			System.out.println(ex.getMessage());
 		}
 
 	}

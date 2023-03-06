@@ -8,7 +8,6 @@ public class Main {
 	public static void main(String[] args) {
 		boolean menu = true;
 		try {
-			int i = 0;
 			newShop.shopName = "Not Enterd";
 			while (menu) {
 				String[] mainMenuOption = { "Shop Settings", "Manage Shop Items", "Create New Invoice", "Report",
@@ -23,6 +22,7 @@ public class Main {
 					break;
 				case "2":
 					ManageShopItem.ManageShopItem1();
+					break;
 				case "3":
 					CreateNewInvoice.CreateNewInvoice1();
 					break;
