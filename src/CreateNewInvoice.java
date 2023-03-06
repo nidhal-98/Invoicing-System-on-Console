@@ -96,9 +96,9 @@ public class CreateNewInvoice {
 										System.out.println("--------------------------------------------------------");
 										Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).total = total;
 										Serialize.invoice();
-										selectItem = false;
 										itemLoop = false;
 										header = false;
+										break;
 									}
 									else {
 										System.out.println("Invalid Input");
@@ -108,6 +108,7 @@ public class CreateNewInvoice {
 								
 							}
 						}
+					itemLoop = checkItemsAvailability();
 					}
 				}
 			}
@@ -115,9 +116,23 @@ public class CreateNewInvoice {
 		catch (Exception ex) {
 			System.out.println("Invalid Input");
 			System.out.println(ex.getMessage());
-			Main.newShop.invoiceList.remove(Main.newShop.invoiceList.size()-1);
+			//Main.newShop.invoiceList.remove(Main.newShop.invoiceList.size()-1);
 		}
 
 	}
+	static boolean checkItemsAvailability() {
+		for(Product i : Main.newShop.productList) {
+			if(i.getQuantity() == 0) {
+				Main.newShop.productList.remove(i);
+			}
+		}
+		if (Main.newShop.productList.isEmpty()) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
 
 }
