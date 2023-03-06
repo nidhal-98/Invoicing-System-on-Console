@@ -22,7 +22,7 @@ public class Main {
 					ShopSetting.shopSetting();
 					break;
 				case "2":
-					ManageShopItem.ManageShopItem();
+					ManageShopItem.ManageShopItem1();
 				case "3":
 					i = i + 1;
 					Invoice newInvoice = new Invoice();

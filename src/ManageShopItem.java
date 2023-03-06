@@ -6,7 +6,7 @@ import java.io.IOException;
 
 
 public class ManageShopItem {
-	public static void ManageShopItem() {
+	public static void ManageShopItem1() {
 		LocalDateTime now = LocalDateTime.now();
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	    String formatDateTime = now.format(formatter);
@@ -65,11 +65,12 @@ public class ManageShopItem {
 								} else if (option.equalsIgnoreCase("N") || option.equalsIgnoreCase("NO")) {
 									try {
 										FileWriter writer = new FileWriter("items.txt", true);
-										writer.write(formatDateTime);
-										writer.write(
-												"\n..............................................................................................................\n");
+										writer.write("Update After Adding Items\n");
+										writer.write(formatDateTime + "\n");
 										writer.write(String.format("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name", "Price", "Quantity",
 												"QTY."));
+										writer.write(
+												"\n..............................................................................................................\n");
 										for (int i = 0; i < Main.newShop.productList.size(); i++) {
 											writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).itemID,
 													Main.newShop.productList.get(i).itemName,
@@ -114,6 +115,29 @@ public class ManageShopItem {
 						deleteItem = deleteItem - 1;
 						Main.newShop.productList.remove(deleteItem);
 						System.out.println("It has deleted successfully :)\n");
+						try {
+							FileWriter writer = new FileWriter("items.txt", true);
+							writer.write("Update After Deleting Items\n");
+							writer.write(formatDateTime + "\n");
+							writer.write(String.format("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name", "Price", "Quantity",
+									"QTY."));
+							writer.write(
+									"\n..............................................................................................................\n");
+							for (int i = 0; i < Main.newShop.productList.size(); i++) {
+								writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).itemID,
+										Main.newShop.productList.get(i).itemName,
+										Main.newShop.productList.get(i).price + " R.O",
+										Main.newShop.productList.get(i).quantity, ((Main.newShop.productList.get(i).price)
+												* (Main.newShop.productList.get(i).quantity) + " R.O")));
+								writer.write(
+										"\n--------------------------------------------------------------------------------------------------------------\n");
+							}
+							writer.close();
+							System.out.println("Successfully wrote to the file.");
+						} catch (IOException e) {
+							System.out.println("An error occurred.");
+							e.printStackTrace();
+						}
 					}
 					break;
 
@@ -136,6 +160,29 @@ public class ManageShopItem {
 							double rePrice = Main.hold.nextDouble();
 							Main.newShop.productList.get(rePriceOption).price = rePrice;
 							System.out.println("It has changed successfully :)\n");
+							try {
+								FileWriter writer = new FileWriter("items.txt", true);
+								writer.write("Update After Changing Price of Items\n");
+								writer.write(formatDateTime + "\n");
+								writer.write(String.format("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name", "Price", "Quantity",
+										"QTY."));
+								writer.write(
+										"\n..............................................................................................................\n");
+								for (int i = 0; i < Main.newShop.productList.size(); i++) {
+									writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).itemID,
+											Main.newShop.productList.get(i).itemName,
+											Main.newShop.productList.get(i).price + " R.O",
+											Main.newShop.productList.get(i).quantity, ((Main.newShop.productList.get(i).price)
+													* (Main.newShop.productList.get(i).quantity) + " R.O")));
+									writer.write(
+											"\n--------------------------------------------------------------------------------------------------------------\n");
+								}
+								writer.close();
+								System.out.println("Successfully wrote to the file.");
+							} catch (IOException e) {
+								System.out.println("An error occurred.");
+								e.printStackTrace();
+							}
 						}
 					}
 					break;
@@ -164,7 +211,10 @@ public class ManageShopItem {
 					break;
 
 				case "5":
+					Serialize.main();
+					menu = false;
 					break;
+				
 				default:
 					System.out.println("Invalid Input\n");
 				}
