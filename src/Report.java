@@ -74,5 +74,23 @@ public class Report {
 		}
 
 	}
+	
+	public static void AppStatistics() {
+		System.out.println("       [1] Shop Settings ➤ ︎" + Main.settingsCount);
+		System.out.println("            [1] Load Data ➤ " + ShopSetting.loadCount);
+		System.out.println("            [2] Set Shop Name ➤ " + ShopSetting.setNameCount);
+		System.out.println("            [3] Set Invoice Header ➤ " + ShopSetting.headerCount);
+		System.out.println("       [2] Manage Shop Items ➤ " + Main.manageCount);
+		System.out.println("            [1] Add Items ➤ " + ManageShopItem.addCount);
+		System.out.println("            [2] Delete Items ➤ " + ManageShopItem.deleteCount);
+		System.out.println("            [3] Change Item Price ➤ " + ManageShopItem.changeCount);
+		System.out.println("            [4] Report All Items ➤ " + ManageShopItem.reportManageCount);
+		System.out.println("       [3] Create New Invoice ➤ " + Main.newInvoiceCount);
+		System.out.println("       [4] Report - Statistics ➤ " + Main.reportStatisticsCount);
+		System.out.println("       [5] Report - All Invoices ➤ " + Main.reportInvoicesCount);
+		System.out.println("       [6] Search ➤ " + Main.searchCount);
+		System.out.println("       [7] Program Statistics ➤ " + Main.statisticsCount);
+
+	}
 
 }

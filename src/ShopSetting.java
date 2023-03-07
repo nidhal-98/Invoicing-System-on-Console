@@ -1,6 +1,10 @@
 
 public class ShopSetting {
+	static int loadCount =0;
+	static int setNameCount =0;
+	static int headerCount =0;
 	public static void shopSetting() {
+		
 		boolean menu = true;
 		while (menu) {
 			try {
@@ -11,13 +15,16 @@ public class ShopSetting {
 				String select = Main.hold.next();
 				switch (select) {
 				case "1":
+					loadCount = loadCount +1;
 					break;
 					
 				case "2":
+					setNameCount = setNameCount +1;
 					Shop.newShop();
 					break;
 					
 				case "3":
+					headerCount = headerCount +1;
 					Shop.setData();
 					break;
 					

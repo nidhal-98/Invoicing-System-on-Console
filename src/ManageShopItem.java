@@ -6,6 +6,11 @@ import java.io.IOException;
 
 
 public class ManageShopItem {
+	static int addCount = 0;
+	static int deleteCount = 0;
+	static int changeCount = 0;
+	static int reportManageCount = 0;
+
 	public static void ManageShopItem1() {
 		LocalDateTime now = LocalDateTime.now();
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -20,6 +25,7 @@ public class ManageShopItem {
 				String select = Main.hold.next();
 				switch (select) {
 				case "1":
+					addCount = addCount + 1;
 					boolean addItem = true;
 					while (addItem) {
 						Product newProduct = new Product();
@@ -99,6 +105,7 @@ public class ManageShopItem {
 					break;
 
 				case "2":
+					deleteCount = deleteCount + 1;
 					if (Main.newShop.productList.isEmpty()) {
 						System.out.print("There is no Items\n");
 						break;
@@ -143,6 +150,7 @@ public class ManageShopItem {
 					break;
 
 				case "3":
+					changeCount = changeCount + 1;
 					if (Main.newShop.productList.isEmpty()) {
 						System.out.println("There is no Items");
 						break;
@@ -189,6 +197,7 @@ public class ManageShopItem {
 					break;
 
 				case "4":
+					reportManageCount = reportManageCount + 1;
 					if (Main.newShop.productList.isEmpty()) {
 						System.out.println("There is no Items");
 						break;
