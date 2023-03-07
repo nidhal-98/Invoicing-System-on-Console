@@ -1,14 +1,14 @@
 import java.time.LocalDateTime;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CreateNewInvoice { 
+public class CreateNewInvoice {
 	static ArrayList<Product> itemss = new ArrayList<>();
 
 	public static void CreateNewInvoice1() {
-
 
 		try {
 			boolean header = true;
@@ -74,14 +74,14 @@ public class CreateNewInvoice {
 									if (option.equalsIgnoreCase("Y") || option.equalsIgnoreCase("YES")) {
 										selectItem = false;
 									} else if (option.equalsIgnoreCase("N") || option.equalsIgnoreCase("No")) {
-										double total1=0;
-										for (int i =0; i<item.size(); i++) {
+										double total1 = 0;
+										for (int i = 0; i < item.size(); i++) {
 											total1 += item.get(i).getQuantity() * item.get(i).getPrice();
 										}
 										System.out.println("Total:  " + total1);
 										System.out.println("Entre the Paid Amount: ");
 										double paid = Main.hold.nextDouble();
-										if(paid < total1) {
+										if (paid < total1) {
 											System.out.println("Not Enough Balance :)");
 											itemLoop = false;
 											header = false;
@@ -123,17 +123,80 @@ public class CreateNewInvoice {
 										System.out.println(String.format("| %-25s | %-10s | %-13s |", "Item Name",
 												"Price", "Quantity"));
 										System.out.println("--------------------------------------------------------");
-										for (int i =0; i<item.size(); i++) {
-											System.out.println(String.format("| %-25s | R.O%6.2f  %6d ",
-													item.get(i).getItemName(), item.get(i).getPrice(), item.get(i).getQuantity()));
+										for (int i = 0; i < item.size(); i++) {
+											System.out.println(
+													String.format("| %-25s | R.O%6.2f  %6d ", item.get(i).getItemName(),
+															item.get(i).getPrice(), item.get(i).getQuantity()));
 											total += item.get(i).getQuantity() * item.get(i).getPrice();
 										}
 										System.out.println("--------------------------------------------------------");
 										System.out.println(String.format("| %-30s | %-25s ", "Total:", total));
-										System.out.println(String.format("| %-30s | %-25s ", "Balance:", paid - total1));
+										System.out
+												.println(String.format("| %-30s | %-25s ", "Balance:", paid - total1));
 										System.out.println("--------------------------------------------------------");
 										Main.newShop.invoiceList.get(Main.newShop.invoiceList.size() - 1).total = total;
 										itemss.addAll(item);
+										try {
+											FileWriter writer = new FileWriter("invoices.txt", true);
+											writer.write("New Invoice\n");
+											writer.write(formatDateTime + "\n");
+											
+											writer.write(
+													"--------------------------------------------------------\n");
+											writer.write(
+													"|                         INVOICE                        |\n");
+											writer.write(
+													"--------------------------------------------------------\n");
+											writer.write(String.format("| %-30s | %-21s |\n", "Shop Name:",
+													Main.newShop.shopName));
+											writer.write(String.format("| %-30s | %-21s |\n", "Shop Phone Number:",
+													Shop.phoneNumberOwner));
+											writer.write(String.format("| %-30s | %-21s |\n", "Shop Fax Number:",
+													Shop.faxOwner));
+											writer.write(
+													String.format("| %-30s | %-21s |\n", "Shop Website:", Shop.website));
+											writer.write(
+													"--------------------------------------------------------\n");
+											writer.write(String.format("| %-30s | %-21s |\n", "Invoice No.:",
+															Main.newShop.invoiceList
+																	.get(Main.newShop.invoiceList.size() - 1).number
+																	+ 1));
+											writer.write(String.format("| %-30s | %-21s |\n", "Customer Name:",
+													Main.newShop.invoiceList
+															.get(Main.newShop.invoiceList.size() - 1).fullName));
+											writer.write(
+													String.format("| %-30s | %-21s |\n", "Date:", Main.newShop.invoiceList
+															.get(Main.newShop.invoiceList.size() - 1).date));
+											writer.write(String.format("| %-30s | %-21s |\n", "Phone:",
+													Main.newShop.invoiceList
+															.get(Main.newShop.invoiceList.size() - 1).phoneNumber));
+											writer.write(String.format("| %-30s | %-21s |\n", "Email:",
+													Main.newShop.invoiceList
+															.get(Main.newShop.invoiceList.size() - 1).emailList));
+											writer.write(
+													"--------------------------------------------------------\n");
+											writer.write(String.format("| %-25s | %-10s | %-13s |\n", "Item Name",
+													"Price", "Quantity"));
+											writer.write(
+													"--------------------------------------------------------\n");
+											for (int i = 0; i < item.size(); i++) {
+												writer.write(String.format("| %-25s | R.O%6.2f  %6d \n",
+														item.get(i).getItemName(), item.get(i).getPrice(),
+														item.get(i).getQuantity()));
+											}
+											writer.write(
+													"--------------------------------------------------------\n");
+											writer.write(String.format("| %-30s | %-25s \n", "Total:", total));
+											writer.write(
+													String.format("| %-30s | %-25s \n", "Balance:", paid - total1));
+											writer.write(
+													"--------------------------------------------------------\n");
+											writer.close();
+											System.out.println("Successfully wrote to the file.");
+										} catch (IOException e) {
+											System.out.println("An error occurred.");
+											e.printStackTrace();
+										}
 										Serialize.invoice();
 										itemLoop = false;
 										header = false;
