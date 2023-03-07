@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class CreateNewInvoice {
-	static ArrayList<Product> itemss = new ArrayList<>();
+	//static ArrayList<Product> itemss = new ArrayList<>();
 
 	public static void CreateNewInvoice1() {
 
@@ -33,11 +33,10 @@ public class CreateNewInvoice {
 					System.out.println("Enter Email:  ");
 					String emailEntrerd = Main.hold.next();
 					Main.newShop.invoiceList.get((Main.newShop.invoiceList.size() - 1)).emailList.add(emailEntrerd);
-					ArrayList<Product> item = new ArrayList<>();
 					boolean itemLoop = true;
 					while (itemLoop) {
 						Product newProduct = new Product();
-						item.add(newProduct);
+						newInvoice.item.add(newProduct);
 						for (int i = 0; i < Main.newShop.productList.size(); i++) {
 							System.out.println((i + 1) + ". " + Main.newShop.productList.get(i).getItemName());
 						}
@@ -50,9 +49,9 @@ public class CreateNewInvoice {
 								System.out.println("Invalid Input\n");
 							} else {
 								int productIndex = itemOption - 1;
-								item.get(item.size() - 1)
+								newInvoice.item.get(newInvoice.item.size() - 1)
 										.setItemName(Main.newShop.productList.get(productIndex).getItemName());
-								System.out.println("The Quantity of " + item.get(item.size() - 1).getItemName() + ": "
+								System.out.println("The Quantity of " + newInvoice.item.get(newInvoice.item.size() - 1).getItemName() + ": "
 										+ Main.newShop.productList.get(productIndex).getQuantity());
 								System.out.println("Enter Quantity:  ");
 								int quantity = Main.hold.nextInt();
@@ -65,8 +64,8 @@ public class CreateNewInvoice {
 									Main.newShop.invoiceList.remove(Main.newShop.invoiceList.size() - 1);
 									selectItem = false;
 								} else {
-									item.get(item.size() - 1).setQuantity(quantity);
-									item.get(item.size() - 1)
+									newInvoice.item.get(newInvoice.item.size() - 1).setQuantity(quantity);
+									newInvoice.item.get(newInvoice.item.size() - 1)
 											.setPrice(Main.newShop.productList.get(productIndex).getPrice());
 
 									System.out.println("Do You Want to Add other Items?");
@@ -75,12 +74,13 @@ public class CreateNewInvoice {
 										selectItem = false;
 									} else if (option.equalsIgnoreCase("N") || option.equalsIgnoreCase("No")) {
 										double total1 = 0;
-										for (int i = 0; i < item.size(); i++) {
-											total1 += item.get(i).getQuantity() * item.get(i).getPrice();
+										for (int i = 0; i < newInvoice.item.size(); i++) {
+											total1 += newInvoice.item.get(i).getQuantity() * newInvoice.item.get(i).getPrice();
 										}
 										System.out.println("Total:  " + total1);
 										System.out.println("Entre the Paid Amount: ");
 										double paid = Main.hold.nextDouble();
+										Main.newShop.invoiceList.get(Main.newShop.invoiceList.size() - 1).paid = paid;
 										if (paid < total1) {
 											System.out.println("Not Enough Balance :)");
 											itemLoop = false;
@@ -123,19 +123,21 @@ public class CreateNewInvoice {
 										System.out.println(String.format("| %-25s | %-10s | %-13s |", "Item Name",
 												"Price", "Quantity"));
 										System.out.println("--------------------------------------------------------");
-										for (int i = 0; i < item.size(); i++) {
+										for (int i = 0; i < newInvoice.item.size(); i++) {
 											System.out.println(
-													String.format("| %-25s | R.O%6.2f  %6d ", item.get(i).getItemName(),
-															item.get(i).getPrice(), item.get(i).getQuantity()));
-											total += item.get(i).getQuantity() * item.get(i).getPrice();
+													String.format("| %-25s | R.O%6.2f  %6d ", newInvoice.item.get(i).getItemName(),
+															newInvoice.item.get(i).getPrice(), newInvoice.item.get(i).getQuantity()));
+											total += newInvoice.item.get(i).getQuantity() * newInvoice.item.get(i).getPrice();
 										}
 										System.out.println("--------------------------------------------------------");
 										System.out.println(String.format("| %-30s | %-25s ", "Total:", total));
+										Main.newShop.invoiceList.get(Main.newShop.invoiceList.size() - 1).balance = paid - total1;
+										System.out.println(String.format("| %-30s | %-25s ", "Paid:", paid));
 										System.out
 												.println(String.format("| %-30s | %-25s ", "Balance:", paid - total1));
 										System.out.println("--------------------------------------------------------");
 										Main.newShop.invoiceList.get(Main.newShop.invoiceList.size() - 1).total = total;
-										itemss.addAll(item);
+										//itemss.addAll(newInvoice.item);
 										try {
 											FileWriter writer = new FileWriter("invoices.txt", true);
 											writer.write("New Invoice\n");
@@ -179,18 +181,19 @@ public class CreateNewInvoice {
 													"Price", "Quantity"));
 											writer.write(
 													"--------------------------------------------------------\n");
-											for (int i = 0; i < item.size(); i++) {
+											for (int i = 0; i < newInvoice.item.size(); i++) {
 												writer.write(String.format("| %-25s | R.O%6.2f  %6d \n",
-														item.get(i).getItemName(), item.get(i).getPrice(),
-														item.get(i).getQuantity()));
+														newInvoice.item.get(i).getItemName(), newInvoice.item.get(i).getPrice(),
+														newInvoice.item.get(i).getQuantity()));
 											}
 											writer.write(
 													"--------------------------------------------------------\n");
 											writer.write(String.format("| %-30s | %-25s \n", "Total:", total));
+											writer.write(String.format("| %-30s | %-25s \n", "Paid:", paid));
 											writer.write(
 													String.format("| %-30s | %-25s \n", "Balance:", paid - total1));
-											writer.write(
-													"--------------------------------------------------------\n");
+											writer.write("--------------------------------------------------------\n");
+											writer.write("................................................................................................................\n");
 											writer.close();
 											System.out.println("Successfully wrote to the file.");
 										} catch (IOException e) {

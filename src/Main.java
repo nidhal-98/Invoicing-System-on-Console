@@ -10,7 +10,7 @@ public class Main {
 		try {
 			newShop.shopName = "Not Enterd";
 			while (menu) {
-				String[] mainMenuOption = { "Shop Settings", "Manage Shop Items", "Create New Invoice", "Report",
+				String[] mainMenuOption = { "Shop Settings", "Manage Shop Items", "Create New Invoice", "Report - Statistics", "Report - All Invoices", 
 						"Search", "Program Statistics", "Exit" };
 				Menu mainMenu = new Menu(mainMenuOption);
 				mainMenu.show();
@@ -28,6 +28,9 @@ public class Main {
 					break;
 				case "4":
 					Report.statistics();
+					break;
+				case "5":
+					Report.allInvoices();
 					break;
 				case "7":
 					menu = false;
