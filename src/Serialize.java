@@ -43,8 +43,8 @@ class Serialize implements Serializable {
 				out.writeObject(
 						String.format("| %-30s | %-21s |", "Shop Website:", Shop.website));
 				out.writeObject(String.format("| %-30s | %-21s |", "Invoice No.:",
-						Main.newShop.invoiceList.get(Main.newShop.invoiceList.size() - 1).number
-								+ 1));
+						Main.newShop.invoiceList.get(j).number
+								));
 				out.writeObject(String.format("| %-30s | %-21s |", "Customer Name:",
 						Main.newShop.invoiceList
 								.get(j).fullName));

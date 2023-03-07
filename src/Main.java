@@ -32,6 +32,9 @@ public class Main {
 				case "5":
 					Report.allInvoices();
 					break;
+				case "6":
+					Search.search1();
+					break;
 				case "7":
 					menu = false;
 					break;

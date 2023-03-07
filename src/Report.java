@@ -27,7 +27,6 @@ public class Report {
 			}
 			else {
 				for(int j =0; j<Main.newShop.invoiceList.size(); j++) {
-					
 					System.out.println("--------------------------------------------------------");
 					System.out
 							.println("|                         INVOICE                        |");
@@ -42,8 +41,8 @@ public class Report {
 							String.format("| %-30s | %-21s |", "Shop Website:", Shop.website));
 					System.out.println("--------------------------------------------------------");
 					System.out.println(String.format("| %-30s | %-21s |", "Invoice No.:",
-							Main.newShop.invoiceList.get(Main.newShop.invoiceList.size() - 1).number
-									+ 1));
+							Main.newShop.invoiceList.get(j).number
+									));
 					System.out.println(String.format("| %-30s | %-21s |", "Customer Name:",
 							Main.newShop.invoiceList
 									.get(j).fullName));

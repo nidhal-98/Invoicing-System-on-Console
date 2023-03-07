@@ -19,6 +19,7 @@ public class CreateNewInvoice {
 				} else {
 					Invoice newInvoice = new Invoice();
 					Main.newShop.invoiceList.add(newInvoice);
+					Main.newShop.invoiceList.get((Main.newShop.invoiceList.size() - 1)).number = Main.newShop.invoiceList.size();
 					LocalDateTime now = LocalDateTime.now();
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 					String formatDateTime = now.format(formatter);
@@ -105,8 +106,7 @@ public class CreateNewInvoice {
 												String.format("| %-30s | %-21s |", "Shop Website:", Shop.website));
 										System.out.println("--------------------------------------------------------");
 										System.out.println(String.format("| %-30s | %-21s |", "Invoice No.:",
-												Main.newShop.invoiceList.get(Main.newShop.invoiceList.size() - 1).number
-														+ 1));
+												Main.newShop.invoiceList.get(Main.newShop.invoiceList.size() - 1).number));
 										System.out.println(String.format("| %-30s | %-21s |", "Customer Name:",
 												Main.newShop.invoiceList
 														.get(Main.newShop.invoiceList.size() - 1).fullName));
@@ -162,7 +162,7 @@ public class CreateNewInvoice {
 											writer.write(String.format("| %-30s | %-21s |\n", "Invoice No.:",
 															Main.newShop.invoiceList
 																	.get(Main.newShop.invoiceList.size() - 1).number
-																	+ 1));
+																	));
 											writer.write(String.format("| %-30s | %-21s |\n", "Customer Name:",
 													Main.newShop.invoiceList
 															.get(Main.newShop.invoiceList.size() - 1).fullName));
