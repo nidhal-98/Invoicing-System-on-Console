@@ -22,7 +22,7 @@ public class Shop {
 			System.out.print("Enter Fax Number:  ");
 			int faxNumberEnterd = Main.hold.nextInt();
 			faxOwner = faxNumberEnterd;
-			System.out.print("Enter Email:  ");
+			System.out.print("Enter Website:  ");
 			String websiteEnterd = Main.hold.next();
 			website = websiteEnterd;
 			System.out.println("Done!\n");

@@ -42,7 +42,7 @@ class Serialize implements Serializable {
 			out.writeObject(String.format(" %-30s  %-21s ", "Date:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).date));
 			out.writeObject(String.format(" %-30s  %-21s ", "Website:", Main.newShop.invoiceList.get(Main.newShop.invoiceList.size()-1).emailList));
 			out.writeObject(String.format(" %-25s  %-10s  %-13s ", "Item Name", "Price", "Quantity"));
-			for (Product i : CreateNewInvoice.item) {
+			for (Product i : CreateNewInvoice.itemss) {
 				out.writeObject(String.format("| %-25s | R.O%6.2f  %6d ", i.getItemName(), i.getPrice(), i.getQuantity()));
 			    total += i.getQuantity() * i.getPrice();
 			}
