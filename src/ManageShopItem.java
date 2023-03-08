@@ -222,6 +222,7 @@ public class ManageShopItem {
 
 				case "5":
 					Serialize.items();
+					JDBC1.items();
 					menu = false;
 					break;
 				

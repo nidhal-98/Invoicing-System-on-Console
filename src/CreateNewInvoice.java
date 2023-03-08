@@ -205,6 +205,7 @@ public class CreateNewInvoice {
 										itemLoop = false;
 										header = false;
 										break;
+										
 									} else {
 										System.out.println("Invalid Input");
 									}
