@@ -201,6 +201,7 @@ public class CreateNewInvoice {
 											e.printStackTrace();
 										}
 										Serialize.invoice();
+										JDBC1.invoices();
 										itemLoop = false;
 										header = false;
 										break;

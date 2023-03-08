@@ -12,6 +12,7 @@ public class Main {
 	static int reportInvoicesCount =0;
 	static int searchCount =0;
 	static int statisticsCount =0;
+	static int deserializationCount = 0;
 
 	public static void main(String[] args) {
 		boolean menu = true;
@@ -19,7 +20,7 @@ public class Main {
 			newShop.shopName = "Not Enterd";
 			while (menu) {
 				String[] mainMenuOption = { "Shop Settings", "Manage Shop Items", "Create New Invoice", "Report - Statistics", "Report - All Invoices", 
-						"Search", "Program Statistics", "Exit" };
+						"Search", "Program Statistics", "Deserialization", "Exit" };
 				Menu mainMenu = new Menu(mainMenuOption);
 				mainMenu.show();
 				String select = hold.next();
@@ -54,6 +55,10 @@ public class Main {
 					Report.AppStatistics();
 					break;
 				case "8":
+					deserializationCount = deserializationCount +1;
+					DeSerialize.main();
+					break;
+				case "9":
 					System.out.println("Are you sure you want to exit? (Yes or No)");
 					String exitOption = hold.next();
 					if(exitOption.equalsIgnoreCase("Y") || exitOption.equalsIgnoreCase("YES")) {
@@ -64,7 +69,7 @@ public class Main {
 					}
 					else {
 						System.out.println("Invalid Input\n");
-
+						
 					}
 					break;
 				default:

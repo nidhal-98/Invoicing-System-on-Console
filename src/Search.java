@@ -4,7 +4,7 @@ public class Search {
 		try {
 			boolean header = true;
 			while (header) {
-				if (Main.newShop.productList.isEmpty()) {
+				if (Main.newShop.invoiceList.isEmpty()) {
 					System.out.println("There is no Invoices");
 					header = false;
 					break;

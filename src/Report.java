@@ -90,6 +90,8 @@ public class Report {
 		System.out.println("       [5] Report - All Invoices ➤ " + Main.reportInvoicesCount);
 		System.out.println("       [6] Search ➤ " + Main.searchCount);
 		System.out.println("       [7] Program Statistics ➤ " + Main.statisticsCount);
+		System.out.println("       [8] Deserialization ➤ " + Main.deserializationCount);
+
 
 	}
 
