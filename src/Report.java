@@ -4,7 +4,7 @@ public class Report {
 		while(true) {
 			if(Main.newShop.invoiceList.isEmpty()) {
 				System.out.printf("%-20s%-20s%-20s\n", "No of Items", "No of Invoices", "Total Sales");
-		        System.out.printf("%-20d%-20d%-20s\n", Main.newShop.productList.size(), Main.newShop.invoiceList.size(), "0");
+		        System.out.printf("%-20d%-20d%-20s\n", Main.newShop.productList.size(), Main.newShop.invoiceList.size(), "0" + " R.O");
 				break;
 			}
 			else {
@@ -13,7 +13,7 @@ public class Report {
 				for(Invoice i : Main.newShop.invoiceList) {
 					total = total + i.total;
 				}
-		        System.out.printf("%-20d%-20d$%-20.2f\n", Main.newShop.productList.size(), Main.newShop.invoiceList.size(), total);
+		        System.out.printf("%-20d%-20d%-20.2f\n", Main.newShop.productList.size(), Main.newShop.invoiceList.size(), (total + " R.O"));
 				break;
 			}
 		}

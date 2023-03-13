@@ -16,6 +16,51 @@ public class ShopSetting {
 				switch (select) {
 				case "1":
 					loadCount = loadCount +1;
+					if (Main.newShop.productList.isEmpty()) {
+						System.out.println("There is no Items");
+						break;
+					} 
+					else if(Main.newShop.invoiceList.isEmpty()) {
+						System.out.println("Thhere is no Invoices");
+					}
+					else {
+						System.out.println("Items: ");
+						System.out.println(
+								"..............................................................................................................");
+						System.out.printf("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name", "Price", "Quantity",
+								"QTY.");
+						for (int i = 0; i < Main.newShop.productList.size(); i++) {
+							System.out.printf("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
+									Main.newShop.productList.get(i).getItemName(),
+									Main.newShop.productList.get(i).getPrice() + " R.O",
+									Main.newShop.productList.get(i).getQuantity(), ((Main.newShop.productList.get(i).getPrice())
+											* (Main.newShop.productList.get(i).getQuantity()) + " R.O"));
+							System.out.println(
+									"--------------------------------------------------------------------------------------------------------------");
+						}
+						System.out.println(
+								"..............................................................................................................");
+						System.out.println("Invoices: ");
+						System.out.println(
+								"..............................................................................................................");
+						System.out.printf("%20s %20s %20s %20s %20s %20s %20s\n", "Invoice Number", "Date", "Name", "Phone",
+								"Total", "Paid", "Balance");
+						for (int i = 0; i < Main.newShop.invoiceList.size(); i++) {
+							System.out.printf("%20s %20s %20s %20s %20s %20s %20s\n", Main.newShop.invoiceList.get(i).number,
+									Main.newShop.invoiceList.get(i).date,
+									Main.newShop.invoiceList.get(i).fullName,
+									Main.newShop.invoiceList.get(i).phoneNumber,
+									Main.newShop.invoiceList.get(i).total,
+									Main.newShop.invoiceList.get(i).paid,
+									Main.newShop.invoiceList.get(i).balance);
+							System.out.println(
+									"--------------------------------------------------------------------------------------------------------------");
+						}
+						System.out.println(
+								"..............................................................................................................");
+
+					}
+
 					break;
 					
 				case "2":

@@ -3,7 +3,10 @@ import java.time.format.DateTimeFormatter;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 public class ManageShopItem {
 	static int addCount = 0;
@@ -13,8 +16,8 @@ public class ManageShopItem {
 
 	public static void ManageShopItem1() {
 		LocalDateTime now = LocalDateTime.now();
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-	    String formatDateTime = now.format(formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String formatDateTime = now.format(formatter);
 		boolean menu = true;
 		while (menu) {
 			try {
@@ -36,7 +39,7 @@ public class ManageShopItem {
 						for (int i = 0; i < Main.newShop.productList.size(); i++) {
 							if (Main.newShop.productList.get(i).getItemID() == itemIDEnterd) {
 								System.out.println("This ID is already there!");
-								Main.newShop.productList.remove(Main.newShop.productList.size()-1);
+								Main.newShop.productList.remove(Main.newShop.productList.size() - 1);
 								ID = false;
 								addItem = false;
 							}
@@ -47,25 +50,26 @@ public class ManageShopItem {
 							String nameEntered = Main.hold.next();
 							boolean name = true;
 							for (int i = 0; i < Main.newShop.productList.size(); i++) {
-								if (Main.newShop.productList.get(i).getItemName() != null
-										&& Main.newShop.productList.get(i).getItemName().equalsIgnoreCase(nameEntered)) {
+								if (Main.newShop.productList.get(i).getItemName() != null && Main.newShop.productList
+										.get(i).getItemName().equalsIgnoreCase(nameEntered)) {
 									System.out.println("This Name is already there!");
-									Main.newShop.productList.remove(Main.newShop.productList.size()-1);
+									Main.newShop.productList.remove(Main.newShop.productList.size() - 1);
 									name = false;
 									addItem = false;
 								}
 							}
 							if (name == true) {
-								Main.newShop.productList
-										.get((Main.newShop.productList.size() - 1)).setItemName(nameEntered);
+								Main.newShop.productList.get((Main.newShop.productList.size() - 1))
+										.setItemName(nameEntered);
 								System.out.print("Enter Item Price:  ");
 								double itemPriceEnterd = Main.hold.nextDouble();
-								Main.newShop.productList
-										.get((Main.newShop.productList.size() - 1)).setPrice(itemPriceEnterd);
+								Main.newShop.productList.get((Main.newShop.productList.size() - 1))
+										.setPrice(itemPriceEnterd);
 								System.out.print("Enter Item Quantity:  ");
 								int itemQuantityEnterd = Main.hold.nextInt();
-								Main.newShop.productList
-										.get((Main.newShop.productList.size() - 1)).setQuantity(itemQuantityEnterd);
+								Main.newShop.productList.get((Main.newShop.productList.size() - 1))
+										.setQuantity(itemQuantityEnterd);
+								JDBC1.items();
 								System.out.print("Do you want to add other item?  ");
 								String option = Main.hold.next();
 								if (option.equalsIgnoreCase("Y") || option.equalsIgnoreCase("YES")) {
@@ -74,16 +78,19 @@ public class ManageShopItem {
 										FileWriter writer = new FileWriter("items.txt", true);
 										writer.write("Update After Adding Items\n");
 										writer.write(formatDateTime + "\n");
-										writer.write(String.format("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name", "Price", "Quantity",
-												"QTY."));
+										writer.write(String.format("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name",
+												"Price", "Quantity", "QTY."));
 										writer.write(
 												"\n..............................................................................................................\n");
 										for (int i = 0; i < Main.newShop.productList.size(); i++) {
-											writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
+											writer.write(String.format("%20s %20s %20s %20s %20s\n",
+													Main.newShop.productList.get(i).getItemID(),
 													Main.newShop.productList.get(i).getItemName(),
 													Main.newShop.productList.get(i).getPrice() + " R.O",
-													Main.newShop.productList.get(i).getQuantity(), ((Main.newShop.productList.get(i).getPrice())
-															* (Main.newShop.productList.get(i).getQuantity()) + " R.O")));
+													Main.newShop.productList.get(i).getQuantity(),
+													((Main.newShop.productList.get(i).getPrice())
+															* (Main.newShop.productList.get(i).getQuantity())
+															+ " R.O")));
 											writer.write(
 													"\n--------------------------------------------------------------------------------------------------------------\n");
 										}
@@ -120,22 +127,55 @@ public class ManageShopItem {
 					if (deleteItem <= 0 || deleteItem > Main.newShop.productList.size()) {
 						System.out.println("Invalid Input\n");
 					} else {
+						String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=shopSystem;" + "encrypt=true;"
+								+ "trustServerCertificate=true";
+
+						String user = "sa";
+						String pass = "root";
+
+						Connection con = null;
+
+						try {
+
+							Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
+									.newInstance();
+							DriverManager.registerDriver(driver);
+
+							con = DriverManager.getConnection(url, user, pass);
+
+							String sql = "delete \r\n" 
+							+ "From Items \r\n" 
+							+ "Where id = " + deleteItem + ";";
+							PreparedStatement statement = con.prepareStatement(sql);
+							statement.executeUpdate();
+
+							// Close the PreparedStatement object
+							statement.close();
+							con.close();
+						} catch (Exception ex) {
+							System.err.println(ex);
+						}
+						
 						deleteItem = deleteItem - 1;
 						Main.newShop.productList.remove(deleteItem);
 						System.out.println("It has deleted successfully :)\n");
+
+						
 						try {
 							FileWriter writer = new FileWriter("items.txt", true);
 							writer.write("Update After Deleting Items\n");
 							writer.write(formatDateTime + "\n");
-							writer.write(String.format("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name", "Price", "Quantity",
-									"QTY."));
+							writer.write(String.format("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name", "Price",
+									"Quantity", "QTY."));
 							writer.write(
 									"\n..............................................................................................................\n");
 							for (int i = 0; i < Main.newShop.productList.size(); i++) {
-								writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
+								writer.write(String.format("%20s %20s %20s %20s %20s\n",
+										Main.newShop.productList.get(i).getItemID(),
 										Main.newShop.productList.get(i).getItemName(),
 										Main.newShop.productList.get(i).getPrice() + " R.O",
-										Main.newShop.productList.get(i).getQuantity(), ((Main.newShop.productList.get(i).getPrice())
+										Main.newShop.productList.get(i).getQuantity(),
+										((Main.newShop.productList.get(i).getPrice())
 												* (Main.newShop.productList.get(i).getQuantity()) + " R.O")));
 								writer.write(
 										"\n--------------------------------------------------------------------------------------------------------------\n");
@@ -169,20 +209,54 @@ public class ManageShopItem {
 							double rePrice = Main.hold.nextDouble();
 							Main.newShop.productList.get(rePriceOption).setPrice(rePrice);
 							System.out.println("It has changed successfully :)\n");
+							
+							String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=shopSystem;" + "encrypt=true;"
+									+ "trustServerCertificate=true";
+
+							String user = "sa";
+							String pass = "root";
+
+							Connection con = null;
+
+							try {
+
+								Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
+										.newInstance();
+								DriverManager.registerDriver(driver);
+
+								con = DriverManager.getConnection(url, user, pass);
+
+								String sql = "UPDATE Items\r\n"
+										+ "SET price =" + rePrice +"\r\n"
+										+ "WHERE id =" + (rePriceOption+1) + ";";
+								PreparedStatement statement = con.prepareStatement(sql);
+								statement.executeUpdate();
+
+								// Close the PreparedStatement object
+								statement.close();
+								con.close();
+							} catch (Exception ex) {
+								System.err.println(ex);
+							}
+							
 							try {
 								FileWriter writer = new FileWriter("items.txt", true);
 								writer.write("Update After Changing Price of Items\n");
 								writer.write(formatDateTime + "\n");
-								writer.write(String.format("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name", "Price", "Quantity",
-										"QTY."));
+								writer.write(String.format("%20s %20s %20s %20s %20s\n", "Item ID", "Item Name",
+										"Price", "Quantity", "QTY."));
 								writer.write(
 										"\n..............................................................................................................\n");
 								for (int i = 0; i < Main.newShop.productList.size(); i++) {
-									writer.write(String.format("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
-											Main.newShop.productList.get(i).getItemName(),
-											Main.newShop.productList.get(i).getPrice() + " R.O",
-											Main.newShop.productList.get(i).getQuantity(), ((Main.newShop.productList.get(i).getPrice())
-													* (Main.newShop.productList.get(i).getQuantity()) + " R.O")));
+									writer.write(
+											String.format("%20s %20s %20s %20s %20s\n",
+													Main.newShop.productList.get(i).getItemID(),
+													Main.newShop.productList.get(i).getItemName(),
+													Main.newShop.productList.get(i).getPrice() + " R.O",
+													Main.newShop.productList.get(i).getQuantity(),
+													((Main.newShop.productList.get(i).getPrice())
+															* (Main.newShop.productList.get(i).getQuantity())
+															+ " R.O")));
 									writer.write(
 											"\n--------------------------------------------------------------------------------------------------------------\n");
 								}
@@ -210,28 +284,29 @@ public class ManageShopItem {
 							System.out.printf("%20s %20s %20s %20s %20s\n", Main.newShop.productList.get(i).getItemID(),
 									Main.newShop.productList.get(i).getItemName(),
 									Main.newShop.productList.get(i).getPrice() + " R.O",
-									Main.newShop.productList.get(i).getQuantity(), ((Main.newShop.productList.get(i).getPrice())
+									Main.newShop.productList.get(i).getQuantity(),
+									((Main.newShop.productList.get(i).getPrice())
 											* (Main.newShop.productList.get(i).getQuantity()) + " R.O"));
 							System.out.println(
 									"--------------------------------------------------------------------------------------------------------------");
 						}
 						System.out.println(
 								"..............................................................................................................");
+
 					}
 					break;
 
 				case "5":
 					Serialize.items();
-					JDBC1.items();
 					menu = false;
 					break;
-				
+
 				default:
 					System.out.println("Invalid Input\n");
 				}
 			} catch (Exception ex) {
 				System.out.println("Invalid Input\n");
-				Main.newShop.productList.remove(Main.newShop.productList.size()-1);
+				Main.newShop.productList.remove(Main.newShop.productList.size() - 1);
 			}
 
 		}
