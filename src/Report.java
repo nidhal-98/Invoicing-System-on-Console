@@ -9,12 +9,12 @@ public class Report {
 			}
 			else {
 				System.out.printf("%-20s%-20s%-20s\n", "No of Items", "No of Invoices", "Total Sales");
-				double total =0;
-				for(Invoice i : Main.newShop.invoiceList) {
-					total = total + i.total;
+				double totalSales =0;
+				for(int i =0; i<Main.newShop.invoiceList.size(); i++) {
+					totalSales = totalSales + Main.newShop.invoiceList.get(i).total;
 				}
-		        System.out.printf("%-20d%-20d%-20.2f\n", Main.newShop.productList.size(), Main.newShop.invoiceList.size(), (total + " R.O"));
-				break;
+		        System.out.printf("%-20d%-20d%-20.2f\n", Main.newShop.productList.size(), Main.newShop.invoiceList.size(), totalSales);
+		        break;
 			}
 		}
 	}

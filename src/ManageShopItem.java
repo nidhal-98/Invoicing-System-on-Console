@@ -127,6 +127,9 @@ public class ManageShopItem {
 					if (deleteItem <= 0 || deleteItem > Main.newShop.productList.size()) {
 						System.out.println("Invalid Input\n");
 					} else {
+						
+						int itemSerialNum = Main.newShop.productList.get(deleteItem-1).getItemID();
+						
 						String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=shopSystem;" + "encrypt=true;"
 								+ "trustServerCertificate=true";
 
@@ -145,7 +148,7 @@ public class ManageShopItem {
 
 							String sql = "delete \r\n" 
 							+ "From Items \r\n" 
-							+ "Where id = " + deleteItem + ";";
+							+ "Where item_ID = " + itemSerialNum + ";";
 							PreparedStatement statement = con.prepareStatement(sql);
 							statement.executeUpdate();
 
@@ -204,6 +207,8 @@ public class ManageShopItem {
 							System.out.println("Invalid Input\n");
 						} else {
 							rePriceOption = rePriceOption - 1;
+							int itemSerialNum = Main.newShop.productList.get(rePriceOption).getItemID();
+							
 							System.out.print("Enter the price of "
 									+ Main.newShop.productList.get(rePriceOption).getItemName() + ":  ");
 							double rePrice = Main.hold.nextDouble();
@@ -228,7 +233,7 @@ public class ManageShopItem {
 
 								String sql = "UPDATE Items\r\n"
 										+ "SET price =" + rePrice +"\r\n"
-										+ "WHERE id =" + (rePriceOption+1) + ";";
+										+ "WHERE item_ID =" + itemSerialNum + ";";
 								PreparedStatement statement = con.prepareStatement(sql);
 								statement.executeUpdate();
 

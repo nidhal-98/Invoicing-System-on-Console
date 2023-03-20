@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 
 public class CreateNewInvoice {
 	// static ArrayList<Product> itemss = new ArrayList<>();
+	
+	
 
 	public static void CreateNewInvoice1() {
 
@@ -33,6 +35,7 @@ public class CreateNewInvoice {
 					Main.newShop.invoiceList.get((Main.newShop.invoiceList.size() - 1)).fullName = fullNameEntrerd;
 					System.out.println("Enter Phone Number:  ");
 					int phoneNumberEntrerd = Main.hold.nextInt();
+										
 					Main.newShop.invoiceList
 							.get((Main.newShop.invoiceList.size() - 1)).phoneNumber = phoneNumberEntrerd;
 					System.out.println("Enter Email:  ");
@@ -42,6 +45,11 @@ public class CreateNewInvoice {
 					while (itemLoop) {
 						Product newProduct = new Product();
 						newInvoice.item.add(newProduct);
+						for(int i = 0; i < Main.newShop.productList.size(); i++) {
+							if(Main.newShop.productList.get(i).getQuantity() == 0) {
+								Main.newShop.productList.remove(i);
+							}
+						}
 						for (int i = 0; i < Main.newShop.productList.size(); i++) {
 							System.out.println((i + 1) + ". " + Main.newShop.productList.get(i).getItemName());
 						}
@@ -54,6 +62,7 @@ public class CreateNewInvoice {
 								System.out.println("Invalid Input\n");
 							} else {
 								int productIndex = itemOption - 1;
+								int itemSerialNum = Main.newShop.productList.get(productIndex).getItemID();
 								newInvoice.item.get(newInvoice.item.size() - 1)
 										.setItemName(Main.newShop.productList.get(productIndex).getItemName());
 								System.out.println("The Quantity of "
@@ -65,20 +74,25 @@ public class CreateNewInvoice {
 									System.out.println("Over Than Stock!");
 									Main.newShop.invoiceList.remove(Main.newShop.invoiceList.size() - 1);
 									selectItem = false;
-								} else if (quantity == Main.newShop.productList.get(productIndex).getQuantity()) {
+								} /*else if (quantity == Main.newShop.productList.get(productIndex).getQuantity()) {
 									System.out.println("Must Be in Stock At Least One!");
 									Main.newShop.invoiceList.remove(Main.newShop.invoiceList.size() - 1);
 									header = false;
 									itemLoop = false;
 									selectItem = false;
 									break;
-								} else {
+								}*/ else {
 									newInvoice.item.get(newInvoice.item.size() - 1).setQuantity(quantity);
 									newInvoice.item.get(newInvoice.item.size() - 1)
 											.setPrice(Main.newShop.productList.get(productIndex).getPrice());
 									int newQuantity = Main.newShop.productList.get(productIndex).getQuantity()
 											- quantity;
 									Main.newShop.productList.get(productIndex).setQuantity(newQuantity);
+									
+									if (quantity == Main.newShop.productList.get(productIndex).getQuantity()) {
+										Main.newShop.productList.remove(productIndex);
+									}
+									
 									
 									/* --------------- New Quantity ------------- */
 									
@@ -92,15 +106,14 @@ public class CreateNewInvoice {
 
 									try {
 
-										Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
-												.newInstance();
+										Driver driver = (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
 										DriverManager.registerDriver(driver);
 
 										con = DriverManager.getConnection(url, user, pass);
 
 										String sql = "UPDATE Items\r\n"
 												+ "SET item_Quantity =" + newQuantity + "\r\n"
-												+ "WHERE id =" + itemOption + ";";
+												+ "WHERE item_ID =" + itemSerialNum + ";";
 										PreparedStatement statement = con.prepareStatement(sql);
 										statement.executeUpdate();
 
@@ -110,6 +123,7 @@ public class CreateNewInvoice {
 									} catch (Exception ex) {
 										System.err.println(ex);
 									}
+									
 									/* --------------------------------------------------------------------- */
 									
 									System.out.println("Do You Want to Add other Items?");
