@@ -70,8 +70,8 @@ public class JDBC1 {
 	}
 
 	public static void items() {
-		String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=shopSystem;" + "encrypt=true;"
-				+ "trustServerCertificate=true";
+		String url = /* "jdbc:sqlserver://localhost:1433;" */ Main.urlEnterd + "databaseName=shopSystem;"
+				+ "encrypt=true;" + "trustServerCertificate=true";
 
 		String user = "sa";
 		String pass = "root";
@@ -113,8 +113,9 @@ public class JDBC1 {
 	}
 
 	public static void readItems() {
-		String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=shopSystem;" + "encrypt=true;"
-				+ "trustServerCertificate=true";
+		String url = /* "jdbc:sqlserver://localhost:1433;" */ Main.urlEnterd + "databaseName=shopSystem;"
+				+ "encrypt=true;" + "trustServerCertificate=true";
+		
 		String user = "sa";
 		String pass = "root";
 
@@ -156,8 +157,9 @@ public class JDBC1 {
 	}
 	
 	public static void readInvoices() {
-	    String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=shopSystem;" + "encrypt=true;"
-	            + "trustServerCertificate=true";
+		String url = /* "jdbc:sqlserver://localhost:1433;" */ Main.urlEnterd + "databaseName=shopSystem;"
+				+ "encrypt=true;" + "trustServerCertificate=true";
+		
 	    String user = "sa";
 	    String pass = "root";
 

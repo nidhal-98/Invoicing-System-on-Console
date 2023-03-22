@@ -130,8 +130,8 @@ public class ManageShopItem {
 						
 						int itemSerialNum = Main.newShop.productList.get(deleteItem-1).getItemID();
 						
-						String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=shopSystem;" + "encrypt=true;"
-								+ "trustServerCertificate=true";
+						String url = /* "jdbc:sqlserver://localhost:1433;" */ Main.urlEnterd + "databaseName=shopSystem;"
+								+ "encrypt=true;" + "trustServerCertificate=true";
 
 						String user = "sa";
 						String pass = "root";
@@ -215,8 +215,8 @@ public class ManageShopItem {
 							Main.newShop.productList.get(rePriceOption).setPrice(rePrice);
 							System.out.println("It has changed successfully :)\n");
 							
-							String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=shopSystem;" + "encrypt=true;"
-									+ "trustServerCertificate=true";
+							String url = /* "jdbc:sqlserver://localhost:1433;" */ Main.urlEnterd + "databaseName=shopSystem;"
+									+ "encrypt=true;" + "trustServerCertificate=true";
 
 							String user = "sa";
 							String pass = "root";

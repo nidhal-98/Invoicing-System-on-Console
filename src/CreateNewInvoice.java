@@ -96,8 +96,8 @@ public class CreateNewInvoice {
 									
 									/* --------------- New Quantity ------------- */
 									
-									String url = "jdbc:sqlserver://localhost:1433;" + "databaseName=shopSystem;" + "encrypt=true;"
-											+ "trustServerCertificate=true";
+									String url = /* "jdbc:sqlserver://localhost:1433;" */ Main.urlEnterd + "databaseName=shopSystem;"
+											+ "encrypt=true;" + "trustServerCertificate=true";
 
 									String user = "sa";
 									String pass = "root";
