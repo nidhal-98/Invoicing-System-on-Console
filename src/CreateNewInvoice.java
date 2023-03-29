@@ -290,7 +290,7 @@ public class CreateNewInvoice {
 										break;
 
 									} else {
-										System.out.println("Invalid Input");
+										System.out.println("Invalid Input ");
 										break;
 									}
 								}

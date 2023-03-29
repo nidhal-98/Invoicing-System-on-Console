@@ -94,7 +94,7 @@ public class Main {
 						}
 						break;
 					default:
-						System.out.println("Invalid Input\n");
+						System.out.println("Invalid Input \n");
 					}
 				}
 			}

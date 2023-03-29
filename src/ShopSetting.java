@@ -81,7 +81,7 @@ public class ShopSetting {
 					System.out.println("Invalid Input\n");
 				}
 			} catch (Exception ex) {
-				System.out.println("Invalid Input\n");
+				System.out.println("Invalid Input \n");
 			}
 
 		}

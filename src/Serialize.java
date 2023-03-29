@@ -68,7 +68,7 @@ class Serialize implements Serializable {
 			}
 			out.close();
 			file.close();
-			System.out.println("serialized and saved");
+			System.out.println("serialized and saved ");
 
 		} catch (Exception e) {
 			e.printStackTrace();

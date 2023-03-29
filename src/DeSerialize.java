@@ -25,7 +25,7 @@ class DeSerialize implements Serializable {
 		}
 
 		catch (IOException ex) {
-			System.out.println("IOException is caught");
+			System.out.println("IOException is caught ");
 		}
 
 	}

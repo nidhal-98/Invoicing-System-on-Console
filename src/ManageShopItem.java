@@ -310,7 +310,7 @@ public class ManageShopItem {
 					System.out.println("Invalid Input\n");
 				}
 			} catch (Exception ex) {
-				System.out.println("Invalid Input\n");
+				System.out.println("Invalid Input \n");
 				Main.newShop.productList.remove(Main.newShop.productList.size() - 1);
 			}
 

@@ -8,8 +8,8 @@ public class JDBC1 {
 		String url = /* "jdbc:sqlserver://localhost:1433;" */ Main.urlEnterd + "databaseName=shopSystem;"
 				+ "encrypt=true;" + "trustServerCertificate=true";
 
-		String user = Main.userName /* "sa" */;
-		String pass = Main.passWord /* "root" */;
+		String user = Main.userName;
+		String pass = Main.passWord;
 
 		Connection con = null;
 
